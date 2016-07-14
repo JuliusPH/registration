@@ -8,6 +8,14 @@ public class PersonDto implements Serializable{
     private Name name;
     private AddressDto addressDto;
 
+    public PersonDto(){
+    }
+
+    public PersonDto(Name name, AddressDto addressDto){
+        this.name = name;
+        this.addressDto = addressDto;
+    }
+
     public Long getId() {
         return id;
     }

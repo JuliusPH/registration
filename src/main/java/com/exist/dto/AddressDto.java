@@ -7,6 +7,14 @@ public class AddressDto implements Serializable{
     private String barangay;
     private String city;
 
+    public AddressDto(){}
+
+    public AddressDto(String streetNumber, String barangay, String city) {
+        this.streetNumber = streetNumber;
+        this.barangay = barangay;
+        this.city = city;
+    }
+
     public String getStreetNumber() {
         return streetNumber;
     }

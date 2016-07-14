@@ -15,6 +15,14 @@ public class Address implements Serializable{
     @Column(name = "city")
     private String city;
 
+    public Address(){}
+
+    public Address(String streetNumber, String barangay, String city){
+        this.streetNumber = streetNumber;
+        this.barangay = barangay;
+        this.city = city;
+    }
+
     public String getStreetNumber() {
         return streetNumber;
     }

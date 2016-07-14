@@ -13,6 +13,13 @@ public class Person implements Serializable{
     @OneToOne(mappedBy = "person", cascade = CascadeType.ALL, fetch=FetchType.EAGER)
     private Address address;
 
+    public Person(){}
+
+    public Person(Name name, Address address){
+        this.name = name;
+        this.address = address;
+    }
+
     public Long getId() {
         return id;
     }

@@ -13,6 +13,14 @@ public class Name implements Serializable{
     @Column(name = "last_name")
     private String lastName;
 
+    public Name(){}
+
+    public Name(String firstName, String middleName, String lastName){
+        this.firstName = firstName;
+        this.middleName = middleName;
+        this.lastName = lastName;
+    }
+
     public String getFirstName() {
         return firstName;
     }

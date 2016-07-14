@@ -1,0 +1,33 @@
+package com.exist.dto;
+
+import java.io.Serializable;
+
+public class AddressDto implements Serializable{
+    private String streetNumber;
+    private String barangay;
+    private String city;
+
+    public String getStreetNumber() {
+        return streetNumber;
+    }
+
+    public void setStreetNumber(String streetNumber) {
+        this.streetNumber = streetNumber;
+    }
+
+    public String getBarangay() {
+        return barangay;
+    }
+
+    public void setBarangay(String barangay) {
+        this.barangay = barangay;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+}

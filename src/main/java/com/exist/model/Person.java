@@ -7,6 +7,7 @@ import java.io.Serializable;
 @Table(name = "person")
 public class Person implements Serializable{
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @Embedded
     private Name name;

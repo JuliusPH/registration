@@ -1,4 +1,4 @@
-package com.exist.dao.impl;
+package com.exist.service.impl;
 
 import com.exist.dao.PersonRepository;
 import com.exist.dto.PersonDto;

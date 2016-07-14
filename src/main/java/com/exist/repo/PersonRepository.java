@@ -1,4 +1,4 @@
-package com.exist.dao;
+package com.exist.repo;
 
 import com.exist.model.Person;
 import org.springframework.data.jpa.repository.JpaRepository;

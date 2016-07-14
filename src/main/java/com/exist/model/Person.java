@@ -11,7 +11,7 @@ public class Person implements Serializable{
     private Long id;
     @Embedded
     private Name name;
-    @OneToOne(mappedBy = "person", cascade = CascadeType.ALL, fetch=FetchType.EAGER)
+    @OneToOne(cascade = CascadeType.ALL)
     private Address address;
 
     public Person(){}

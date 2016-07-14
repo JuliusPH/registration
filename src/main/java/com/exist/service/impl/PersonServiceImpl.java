@@ -1,10 +1,9 @@
 package com.exist.service.impl;
 
-import com.exist.dao.PersonRepository;
+import com.exist.repo.PersonRepository;
 import com.exist.dto.PersonDto;
 import com.exist.model.Person;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
+import com.exist.service.PersonService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,21 +14,11 @@ import java.util.stream.Collectors;
 
 @Service
 @Transactional
-public class PersonServiceImpl{
+public class PersonServiceImpl implements PersonService{
     @Autowired
     private PersonRepository personRepository;
     @Autowired
-    private SessionFactory sessionFactory;
-    @Autowired
     private ModelMapper mapper;
-
-    public PersonServiceImpl(){
-
-    }
-
-    private Session getSession(){
-        return sessionFactory.openSession();
-    }
 
     public PersonDto findOne(Long id){
         return mapper.map(personRepository.findOne(id), PersonDto.class);

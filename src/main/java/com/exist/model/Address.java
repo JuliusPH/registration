@@ -2,12 +2,15 @@ package com.exist.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.Table;
 import java.io.Serializable;
 
 @Entity
 @Table(name = "address")
 public class Address implements Serializable{
+    @Id
+    private Long id;
     @Column(name = "street_number")
     private String streetNumber;
     @Column(name = "barangay")

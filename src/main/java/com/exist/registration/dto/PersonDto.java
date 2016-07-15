@@ -39,4 +39,8 @@ public class PersonDto implements Serializable{
     public void setAddress(AddressDto addressDto) {
         this.address = addressDto;
     }
+
+    public void getFullName(){
+        return name.getFirstName() + " " + name.getMiddleName() + " " + name.getLastName();
+    }
 }

@@ -1,4 +1,4 @@
-group 'com.exist'
+group 'com.exist.registration'
 version '0.0.1-SNAPSHOT'
 
 buildscript{

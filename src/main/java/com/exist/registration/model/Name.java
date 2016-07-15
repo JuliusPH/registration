@@ -1,4 +1,4 @@
-package com.exist.model;
+package com.exist.registration.model;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;

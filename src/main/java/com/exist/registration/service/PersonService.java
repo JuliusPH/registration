@@ -1,7 +1,7 @@
-package com.exist.service;
+package com.exist.registration.service;
 
-import com.exist.dto.PersonDto;
-import com.exist.model.Person;
+import com.exist.registration.dto.PersonDto;
+import com.exist.registration.model.Person;
 
 import java.util.List;
 

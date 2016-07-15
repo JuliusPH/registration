@@ -1,6 +1,6 @@
-package com.exist.repo;
+package com.exist.registration.repo;
 
-import com.exist.model.Person;
+import com.exist.registration.model.Person;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import java.util.List;

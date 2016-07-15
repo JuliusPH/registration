@@ -1,4 +1,4 @@
-package com.exist.dto;
+package com.exist.registration.dto;
 
 import java.io.Serializable;
 

@@ -1,9 +1,9 @@
-package com.exist.service.impl;
+package com.exist.registration.service.impl;
 
-import com.exist.repo.PersonRepository;
-import com.exist.dto.PersonDto;
-import com.exist.model.Person;
-import com.exist.service.PersonService;
+import com.exist.registration.dto.PersonDto;
+import com.exist.registration.service.PersonService;
+import com.exist.registration.repo.PersonRepository;
+import com.exist.registration.model.Person;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 
 @Service
 @Transactional
-public class PersonServiceImpl implements PersonService{
+public class PersonServiceImpl implements PersonService {
     @Autowired
     private PersonRepository personRepository;
     @Autowired

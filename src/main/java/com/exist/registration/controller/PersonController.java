@@ -1,6 +1,6 @@
-package com.exist.controller;
+package com.exist.registration.controller;
 
-import com.exist.service.PersonService;
+import com.exist.registration.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

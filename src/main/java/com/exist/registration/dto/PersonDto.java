@@ -1,6 +1,6 @@
-package com.exist.dto;
+package com.exist.registration.dto;
 
-import com.exist.model.Name;
+import com.exist.registration.model.Name;
 import java.io.Serializable;
 
 public class PersonDto implements Serializable{

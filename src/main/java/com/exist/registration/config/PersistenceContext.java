@@ -1,4 +1,4 @@
-package com.exist.config;
+package com.exist.registration.config;
 
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.modelmapper.ModelMapper;

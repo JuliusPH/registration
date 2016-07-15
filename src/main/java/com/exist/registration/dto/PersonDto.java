@@ -6,14 +6,14 @@ import java.io.Serializable;
 public class PersonDto implements Serializable{
     private Long id;
     private Name name;
-    private AddressDto addressDto;
+    private AddressDto address;
 
     public PersonDto(){
     }
 
-    public PersonDto(Name name, AddressDto addressDto){
+    public PersonDto(Name name, AddressDto address){
         this.name = name;
-        this.addressDto = addressDto;
+        this.address = address;
     }
 
     public Long getId() {
@@ -32,11 +32,11 @@ public class PersonDto implements Serializable{
         this.name = name;
     }
 
-    public AddressDto getAddressDto() {
-        return addressDto;
+    public AddressDto getAddress() {
+        return address;
     }
 
-    public void setAddressDto(AddressDto addressDto) {
-        this.addressDto = addressDto;
+    public void setAddress(AddressDto addressDto) {
+        this.address = addressDto;
     }
 }

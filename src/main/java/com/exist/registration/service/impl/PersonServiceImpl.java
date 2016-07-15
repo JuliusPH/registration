@@ -17,8 +17,7 @@ import java.util.stream.Collectors;
 public class PersonServiceImpl implements PersonService {
     @Autowired
     private PersonRepository personRepository;
-    @Autowired
-    private ModelMapper mapper;
+    private ModelMapper mapper = new ModelMapper();
 
     public PersonDto findOne(Long id){
         return mapper.map(personRepository.findOne(id), PersonDto.class);

@@ -29,11 +29,11 @@ public class PersonServiceImpl implements PersonService {
             .collect(Collectors.toList());
     }
 
-    public PersonDto save(Person person){
-        return mapper.map(personRepository.save(person), PersonDto.class);
+    public PersonDto save(PersonDto person){
+        return mapper.map(personRepository.save(mapper.map(person, Person.class)), PersonDto.class);
     }
 
-    public void delete(Person person){
-        personRepository.delete(person);
+    public void delete(PersonDto person){
+        personRepository.delete(mapper.map(person, Person.class));
     }
 }

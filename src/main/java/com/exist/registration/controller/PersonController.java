@@ -29,40 +29,4 @@ public class PersonController{
         ModelAndView modelAndView = new ModelAndView("index");
         return modelAndView;
     }
-
-    @GetMapping("/add")
-    public ModelAndView form(){
-        ModelAndView modelAndView = new ModelAndView("form");
-        PersonDto person = new PersonDto();
-        modelAndView.addObject("person", person);
-        return modelAndView;
-    }
-
-    @GetMapping("/update/{id}")
-    public ModelAndView form(@PathVariable Long id){
-        ModelAndView modelAndView = new ModelAndView("form");
-        PersonDto person = personService.findOne(id);
-        modelAndView.addObject("person", person);
-        return modelAndView;
-    }
-
-    @PostMapping("/save")
-    public ModelAndView save(@Valid PersonDto person, BindingResult result, RedirectAttributes redirectAttributes){
-        ModelAndView modelAndView = new ModelAndView("redirect:/");
-        if(result.hasErrors()){
-            modelAndView.addObject("person", person);
-            return new ModelAndView("form");
-        }
-        else{
-            if(personService.save(person) != null){
-                redirectAttributes.addFlashAttribute("status", "positive");
-                redirectAttributes.addFlashAttribute("message", person.getFullName() + " is successfully added.");
-            }
-            else{
-                redirectAttributes.addFlashAttribute("status", "negative");
-                redirectAttributes.addFlashAttribute("message", "An error occurs, please try again.");
-            }
-        }
-        return new ModelAndView("redirect:/");
-    }
 }

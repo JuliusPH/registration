@@ -19,10 +19,12 @@ public class PersonServiceImpl implements PersonService {
     private PersonRepository personRepository;
     private ModelMapper mapper = new ModelMapper();
 
+    @Transactional(readOnly = true)
     public PersonDto findOne(Long id){
         return mapper.map(personRepository.findOne(id), PersonDto.class);
     }
 
+    @Transactional(readOnly = true)
     public List<PersonDto> findAll(){
         return personRepository.findAll().stream()
             .map(person -> mapper.map(person, PersonDto.class))

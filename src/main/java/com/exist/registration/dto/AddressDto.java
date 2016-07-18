@@ -1,11 +1,24 @@
 package com.exist.registration.dto;
 
+import org.hibernate.validator.constraints.Length;
+
+import javax.persistence.Column;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 public class AddressDto implements Serializable{
     private Long id;
+    @NotNull
+    @Length(min = 1, max = 50)
+    @Column(name = "first_name")
     private String streetNumber;
+    @NotNull
+    @Length(min = 1, max = 50)
+    @Column(name = "first_name")
     private String barangay;
+    @NotNull
+    @Length(min = 1, max = 50)
+    @Column(name = "first_name")
     private String city;
 
     public AddressDto(){}

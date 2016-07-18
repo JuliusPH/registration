@@ -1,11 +1,15 @@
 package com.exist.registration.dto;
 
 import com.exist.registration.model.Name;
+
+import javax.validation.Valid;
 import java.io.Serializable;
 
 public class PersonDto implements Serializable{
     private Long id;
+    @Valid
     private Name name;
+    @Valid
     private AddressDto address;
 
     public PersonDto(){
@@ -40,7 +44,7 @@ public class PersonDto implements Serializable{
         this.address = addressDto;
     }
 
-    public void getFullName(){
+    public String getFullName(){
         return name.getFirstName() + " " + name.getMiddleName() + " " + name.getLastName();
     }
 }

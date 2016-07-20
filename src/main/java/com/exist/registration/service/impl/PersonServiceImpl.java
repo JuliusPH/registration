@@ -5,8 +5,6 @@ import com.exist.registration.service.PersonService;
 import com.exist.registration.repo.PersonRepository;
 import com.exist.registration.model.Person;
 import org.modelmapper.ModelMapper;
-import org.modelmapper.TypeToken;
-import java.lang.reflect.Type;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,8 +28,9 @@ public class PersonServiceImpl implements PersonService {
 
     @Transactional(readOnly = true)
     public List<PersonDto> findAll(){
-        Type targetListType = new TypeToken<List<PersonDto>>(){}.getType();
-        return mapper.map(personRepository.findAll(), targetListType);
+        List<Person> persons = personRepository.findAll();
+        return persons.stream().map(person -> mapper.map(person, PersonDto.class))
+            .collect(Collectors.toList());
     }
 
     public PersonDto save(PersonDto person){

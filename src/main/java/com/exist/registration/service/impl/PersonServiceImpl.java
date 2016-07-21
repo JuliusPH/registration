@@ -7,6 +7,7 @@ import com.exist.registration.model.Person;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -23,21 +24,32 @@ public class PersonServiceImpl implements PersonService {
 
     @Transactional(readOnly = true)
     public PersonDto findOne(Long id){
-        return mapper.map(personRepository.findOne(id), PersonDto.class);
+        return mapToPersonDto(personRepository.findOne(id));
     }
 
     @Transactional(readOnly = true)
     public List<PersonDto> findAll(){
         List<Person> persons = personRepository.findAll();
-        return persons.stream().map(person -> mapper.map(person, PersonDto.class))
+        return persons.stream().map(person -> mapToPersonDto(person))
             .collect(Collectors.toList());
     }
 
-    public PersonDto save(PersonDto person){
-        return mapper.map(personRepository.save(mapper.map(person, Person.class)), PersonDto.class);
+    public PersonDto save(PersonDto personDto){
+        Person person = mapToPerson(personDto);
+        return mapToPersonDto(personRepository.save(person));
     }
 
-    public void delete(PersonDto person){
-        personRepository.delete(mapper.map(person, Person.class));
+    public void delete(PersonDto personDto){
+        personRepository.delete(mapToPerson(personDto));
+    }
+
+    @Transactional(propagation = Propagation.NOT_SUPPORTED)
+    public PersonDto mapToPersonDto(Person person){
+        return mapper.map(person, PersonDto.class);
+    }
+
+    @Transactional(propagation = Propagation.NOT_SUPPORTED)
+    public Person mapToPerson(PersonDto personDto){
+        return mapper.map(personDto, Person.class);
     }
 }

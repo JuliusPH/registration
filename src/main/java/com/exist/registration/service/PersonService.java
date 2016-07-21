@@ -10,7 +10,11 @@ public interface PersonService{
 
     List<PersonDto> findAll();
 
-    PersonDto save(PersonDto person);
+    PersonDto save(PersonDto personDto);
 
-    void delete(PersonDto person);
+    void delete(PersonDto personDto);
+
+    PersonDto mapToPersonDto(Person person);
+
+    Person mapToPerson(PersonDto personDto);
 }

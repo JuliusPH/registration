@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 public class PersonController{
@@ -27,6 +28,8 @@ public class PersonController{
     @GetMapping("/")
     public ModelAndView index(){
         ModelAndView modelAndView = new ModelAndView("index");
+        List<PersonDto> persons = personService.findAll();
+        modelAndView.addObject("persons", persons);
         return modelAndView;
     }
 

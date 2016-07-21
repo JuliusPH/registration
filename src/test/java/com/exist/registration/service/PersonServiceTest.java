@@ -38,18 +38,20 @@ public class PersonServiceTest{
     @Test
     public void shouldReturnPerson() throws Exception {
         when(personRepository.findOne(1L)).thenReturn(new Person());
-        personService.findOne(1L);
+        PersonDto personDto = personService.findOne(1L);
         verify(personRepository).findOne(anyLong());
         verify(mapper).map(any(Person.class), eq(PersonDto.class));
-        assertNotNull(personService.findOne(1L));
+        assertNotNull(personDto);
     }
 
     @Test
     public void shouldReturnListWithNoPerson() throws Exception {
         when(personRepository.findAll()).thenReturn(new ArrayList<Person>());
-        personService.findAll();
+        List<PersonDto> personDtos = personService.findAll();
         verify(personRepository).findAll();
-        assertTrue(personService.findAll().size() == 0);
+        assertNotNull(personDtos);
+        assertTrue(personDtos.size() == 0);
+
     }
 
     @Test
@@ -57,10 +59,10 @@ public class PersonServiceTest{
         List<Person> persons = new ArrayList<>();
         persons.add(new Person());
         when(personRepository.findAll()).thenReturn(persons);
-        personService.findAll();
+        List<PersonDto> personDtos = personService.findAll();
         verify(personRepository).findAll();
         verify(mapper).map(any(Person.class), eq(PersonDto.class));
-        assertTrue(personService.findAll().size() > 0);
+        assertTrue(personDtos.size() > 0);
     }
 
     @Test

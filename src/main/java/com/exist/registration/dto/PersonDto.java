@@ -45,6 +45,6 @@ public class PersonDto implements Serializable{
     }
 
     public String getFullName(){
-        return name.getFirstName() + " " + name.getMiddleName() + " " + name.getLastName();
+        return name != null ? name.getFirstName() + " " + name.getMiddleName() + " " + name.getLastName() : null;
     }
 }

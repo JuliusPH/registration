@@ -15,12 +15,26 @@ apply plugin: 'java'
 apply plugin: 'war'
 apply plugin: 'spring-boot'
 apply plugin: 'idea'
+apply plugin: "jacoco"
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 repositories{
     mavenCentral()
+}
+
+jacoco {
+    toolVersion = "0.7.6.201602180812"
+    reportsDir = file("$buildDir/customJacocoReportDir")
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled false
+        csv.enabled false
+        html.destination "${buildDir}/jacocoHtml"
+    }
 }
 
 dependencies{
@@ -47,4 +61,5 @@ dependencies{
     compile group: 'org.glassfish.web', name: 'el-impl', version: '2.2'
     compile group: 'javax.servlet', name: 'jstl', version: '1.2'
     compile group: 'org.mockito', name: 'mockito-all', version: '1.10.19'
+    compile group: 'org.powermock', name: 'powermock-api-mockito', version: '1.6.5'
 }

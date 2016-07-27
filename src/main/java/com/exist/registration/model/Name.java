@@ -5,8 +5,6 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 @Embeddable
@@ -15,12 +13,12 @@ public class Name implements Serializable{
     @Length(max = 50)
     @Column(name = "first_name")
     private String firstName;
-    @NotNull
-    @Length(min = 1, max = 50)
+    @NotEmpty
+    @Length(max = 50)
     @Column(name = "middle_name")
     private String middleName;
-    @NotNull
-    @Length(min = 1, max = 50)
+    @NotEmpty
+    @Length(max = 50)
     @Column(name = "last_name")
     private String lastName;
 

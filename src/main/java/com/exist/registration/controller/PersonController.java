@@ -4,14 +4,12 @@ import com.exist.registration.dto.PersonDto;
 import com.exist.registration.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.persistence.PersistenceException;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -20,52 +18,60 @@ public class PersonController{
     @Autowired
     private PersonService personService;
 
-    @ModelAttribute("person")
-    public PersonDto getPersonObect() {
+    @ModelAttribute("personDto")
+    public PersonDto getPersonDtoObect() {
         return new PersonDto();
     }
 
     @GetMapping("/")
-    public ModelAndView index(){
-        ModelAndView modelAndView = new ModelAndView("index");
-        List<PersonDto> persons = personService.findAll();
-        modelAndView.addObject("persons", persons);
-        return modelAndView;
+    public String index(Model model){
+        List<PersonDto> personsDtos = personService.findAll();
+        model.addAttribute("persons", personsDtos);
+        return "index";
     }
 
     @GetMapping("/add")
-    public ModelAndView form(){
-        ModelAndView modelAndView = new ModelAndView("form");
-        PersonDto person = new PersonDto();
-        modelAndView.addObject("person", person);
-        return modelAndView;
+    public String form(){
+        return "form";
     }
 
     @GetMapping("/update/{id}")
-    public ModelAndView form(@PathVariable Long id){
-        ModelAndView modelAndView = new ModelAndView("form");
-        PersonDto person = personService.findOne(id);
-        modelAndView.addObject("person", person);
-        return modelAndView;
+    public String form(@PathVariable Long id, Model model) throws NullPointerException{
+        PersonDto personDto = personService.findOne(id);
+        model.addAttribute("person", personDto);
+        return "form";
     }
 
     @PostMapping("/save")
-    public ModelAndView save(@Valid PersonDto person, BindingResult result, RedirectAttributes redirectAttributes){
-        ModelAndView modelAndView = new ModelAndView("redirect:/");
+    public String save(@Valid @ModelAttribute("personDto") PersonDto personDto, BindingResult result, RedirectAttributes redirectAttributes){
         if(result.hasErrors()){
-            modelAndView.addObject("person", person);
-            return new ModelAndView("form");
+            return "form";
         }
         else{
-            if(personService.save(person) != null){
-                redirectAttributes.addFlashAttribute("status", "positive");
-                redirectAttributes.addFlashAttribute("message", person.getFullName() + " is successfully added.");
+            if(personService.save(personDto) != null){
+                redirectAttributes.addFlashAttribute("status", "success");
+                redirectAttributes.addFlashAttribute("message", personDto.getFullName() + " is successfully added.");
             }
             else{
-                redirectAttributes.addFlashAttribute("status", "negative");
+                redirectAttributes.addFlashAttribute("status", "failed");
                 redirectAttributes.addFlashAttribute("message", "An error occurs, please try again.");
             }
         }
-        return new ModelAndView("redirect:/");
+        return "redirect:/";
+    }
+
+    @PostMapping("/delete/{id}")
+    public String delete(@PathVariable Long id, RedirectAttributes redirectAttributes){
+        PersonDto personDto = personService.findOne(id);
+        try{
+            personService.delete(personDto);
+            redirectAttributes.addFlashAttribute("status", "success");
+            redirectAttributes.addFlashAttribute("message", personDto.getFullName() + " is successfully deleted.");
+        }
+        catch(PersistenceException ex){
+            redirectAttributes.addFlashAttribute("status", "failed");
+            redirectAttributes.addFlashAttribute("message", "An error occurs, please try again.");
+        }
+        return "redirect:/";
     }
 }
